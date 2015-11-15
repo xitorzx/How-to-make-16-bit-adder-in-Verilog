@@ -1,0 +1,19 @@
+# How-to-make-16-bit-adder-in-Verilog
+How to make 16-bit adder in Verilog #VLSI #Verilog
+
+#RTL level
+
+module adder_16bit(A , B ,Add_ctrl , O , C_out , SUM);
+
+input [15:00] A , B ;
+input Add_ctrl;//1 for sub ,0 for add
+
+output [15:00] SUM ;
+output C_out ;
+output O ;
+integer i;
+
+assign {C_out,SUM} = (Add_ctrl!=1'b0)?(A+{~B+1'b1}):(A+B);
+assign O =/*Positive Number OverFlow*/( ((Add_ctrl==1)&&(A[15]==1)&&(B[15]==0)&&(SUM[15]==0)) || ((Add_ctrl==1)&&(A[15]==0)&&(B[15]==1)&&(SUM[15]==1)) || /*Negative Number OverFlow*/ ((Add_ctrl==0)&&(A[15]==0)&&(B[15]==0)&&(SUM[15]==1)) || ((Add_ctrl==0)&&(A[15]==1)&&(B[15]==1)&&(SUM[15]==0)) )? 1:0;
+
+endmodule
