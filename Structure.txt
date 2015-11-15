@@ -1,7 +1,8 @@
 # How-to-make-16-bit-adder-in-Verilog
 How to make 16-bit adder in Verilog #VLSI #Verilog
 
-//Gate lebel
+//Gate level
+
 module adder_16bit(A , B ,Add_ctrl , O , C_out , SUM);
 
 input [15:00] A , B ;
