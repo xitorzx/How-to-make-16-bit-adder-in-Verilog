@@ -1,0 +1,151 @@
+# How-to-make-16-bit-adder-in-Verilog
+How to make 16-bit adder in Verilog #VLSI #Verilog
+
+//Gate lebel
+module adder_16bit(A , B ,Add_ctrl , O , C_out , SUM);
+
+input [15:00] A , B ;
+input Add_ctrl;//1 for sub ,0 for add
+
+output [15:00] SUM ;
+output C_out ;
+output O ;
+
+wire [15:0]y;
+wire [15:0]xab;
+wire [15:0]andc;
+wire [15:0]andab;
+wire [15:0]cout;
+
+
+//FA1(Fulladder)
+xor xor0(xab[0],A[0],y[0]);
+xor xor1(SUM[0],xab[0],Add_ctrl);
+and and0(andc[0],xab[0],Add_ctrl);
+and and1(andab[0],A[0],y[0]);
+or or0(cout[0],andc[0],andab[0]);
+
+//FA2
+xor xor_1(xab[1],A[1],y[1]);
+xor xor2(SUM[1],xab[1],cout[0]);
+and and_1(andc[1],xab[1],cout[0]);
+and and2(andab[1],A[1],y[1]);
+or or1(cout[1],andc[1],andab[1]);
+
+//FA3
+xor xor3(xab[2],A[2],y[2]);
+xor xor4(SUM[2],xab[2],cout[1]);
+and and3(andc[2],xab[2],cout[1]);
+and and4(andab[2],A[2],y[2]);
+or or2(cout[2],andc[2],andab[2]);
+
+//FA4
+xor xor5(xab[3],A[3],y[3]);
+xor xor6(SUM[3],xab[3],cout[2]);
+and and5(andc[3],xab[3],cout[2]);
+and and6(andab[3],A[3],y[3]);
+or or3(cout[3],andc[3],andab[3]);
+
+//FA5
+xor xor6(xab[4],A[4],y[4]);
+xor xor7(SUM[4],xab[4],cout[3]);
+and and6(andc[4],xab[4],cout[3]);
+and and7(andab[4],A[4],y[4]);
+or or4(cout[4],andc[4],andab[4]);
+
+//FA6
+xor xor8(xab[5],A[5],y[5]);
+xor xor9(SUM[5],xab[5],cout[4]);
+and and8(andc[5],xab[5],cout[4]);
+and and9(andab[5],A[5],y[5]);
+or or5(cout[5],andc[5],andab[5]);
+
+//FA7
+xor xor10(xab[6],A[6],y[6]);
+xor xor11(SUM[6],xab[6],cout[5]);
+and and10(andc[6],xab[6],cout[5]);
+and and11(andab[6],A[6],y[6]);
+or or6(cout[6],andc[6],andab[6]);
+
+//FA8
+xor xor12(xab[7],A[7],y[7]);
+xor xor13(SUM[7],xab[7],cout[6]);
+and and12(andc[7],xab[7],cout[6]);
+and and13(andab[7],A[7],y[7]);
+or or7(cout[7],andc[7],andab[7]);
+
+//FA9
+xor xor14(xab[8],A[8],y[8]);
+xor xor15(SUM[8],xab[8],cout[7]);
+and and14(andc[8],xab[8],cout[7]);
+and and15(andab[8],A[8],y[8]);
+or or8(cout[8],andc[8],andab[8]);
+
+//FA10
+xor xor16(xab[9],A[9],y[9]);
+xor xor17(SUM[9],xab[9],cout[8]);
+and and16(andc[9],xab[9],cout[8]);
+and and17(andab[9],A[9],y[9]);
+or or9(cout[9],andc[9],andab[9]);
+
+//FA11
+xor xor18(xab[10],A[10],y[10]);
+xor xor19(SUM[10],xab[10],cout[9]);
+and and18(andc[10],xab[10],cout[9]);
+and and19(andab[10],A[10],y[10]);
+or or10(cout[10],andc[10],andab[10]);
+
+//FA12
+xor xor20(xab[11],A[11],y[11]);
+xor xor21(SUM[11],xab[11],cout[10]);
+and and20(andc[11],xab[11],cout[10]);
+and and21(andab[11],A[11],y[11]);
+or or11(cout[11],andc[11],andab[11]);
+
+//FA13
+xor xor22(xab[12],A[12],y[12]);
+xor xor23(SUM[12],xab[12],cout[11]);
+and and22(andc[12],xab[12],cout[11]);
+and and23(andab[12],A[12],y[12]);
+or or12(cout[12],andc[12],andab[12]);
+
+//FA14
+xor xor24(xab[13],A[13],y[13]);
+xor xor25(SUM[13],xab[13],cout[12]);
+and and24(andc[13],xab[13],cout[12]);
+and and25(andab[13],A[13],y[13]);
+or or13(cout[13],andc[13],andab[13]);
+
+//FA15
+xor xor26(xab[14],A[14],y[14]);
+xor xor27(SUM[14],xab[14],cout[13]);
+and and26(andc[14],xab[14],cout[13]);
+and and27(andab[14],A[14],y[14]);
+or or14(cout[14],andc[14],andab[14]);
+
+//FA16
+xor xor28(xab[15],A[15],y[15]);
+xor xor29(SUM[15],xab[15],cout[14]);
+and and28(andc[15],xab[15],cout[14]);
+and and29(andab[15],A[15],y[15]);
+or or15(C_out,andc[15],andab[15]);
+
+xor xor30(y[0],Add_ctrl,B[0]);
+xor xor31(y[1],Add_ctrl,B[1]);
+xor xor32(y[2],Add_ctrl,B[2]); 
+xor xor33(y[3],Add_ctrl,B[3]);
+xor xor34(y[4],Add_ctrl,B[4]);
+xor xor35(y[5],Add_ctrl,B[5]);
+xor xor36(y[6],Add_ctrl,B[6]);
+xor xor37(y[7],Add_ctrl,B[7]);
+xor xor38(y[8],Add_ctrl,B[8]);
+xor xor39(y[9],Add_ctrl,B[9]);
+xor xor40(y[10],Add_ctrl,B[10]);
+xor xor41(y[11],Add_ctrl,B[11]);
+xor xor42(y[12],Add_ctrl,B[12]);
+xor xor43(y[13],Add_ctrl,B[13]);
+xor xor44(y[14],Add_ctrl,B[14]);
+xor xor45(y[15],Add_ctrl,B[15]);
+
+xor xor46(O,cout[14],C_out);// overflow testing
+endmodule
